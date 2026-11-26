@@ -1,0 +1,171 @@
+/* Hearth & Ledger — warm, paper-like household budget design.
+   One stylesheet, no external fonts or images: everything is local. */
+
+:root {
+  --cream: #f7f3ea;
+  --paper: #fffdf6;
+  --ink: #22301f;
+  --muted: #6b7263;
+  --green: #2e5d3a;
+  --green-deep: #1e4028;
+  --amber: #d98e2b;
+  --amber-soft: #f6e3c2;
+  --red: #b3402e;
+  --red-soft: #f7ddd6;
+  --line: #e2dac7;
+  --card-shadow: 0 1px 2px rgba(34, 48, 31, .08), 0 4px 14px rgba(34, 48, 31, .06);
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.5;
+  padding-bottom: 76px; /* room for the phone nav */
+}
+
+a { color: var(--green); }
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; font-size: 1rem; }
+
+/* ---------- header ---------- */
+.topbar {
+  background: var(--green-deep);
+  color: #f3efe2;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  display: grid; place-items: center;
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--amber); color: var(--green-deep);
+  font-size: 26px; line-height: 1;
+}
+.brand strong { display: block; font-size: 1.25rem; letter-spacing: .02em; }
+.brand small { color: #c9d2bd; font-size: .8rem; }
+.main-nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.main-nav a {
+  color: #e8e4d2; text-decoration: none;
+  padding: 8px 12px; border-radius: 9px; font-size: .95rem;
+}
+.main-nav a:hover { background: rgba(255, 255, 255, .12); }
+.main-nav a.active { background: var(--amber); color: var(--green-deep); font-weight: 700; }
+.month-picker { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.month-picker button {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid #5d7a63; background: transparent; color: #f3efe2; font-size: 1.2rem;
+}
+.month-picker button:hover { background: rgba(255, 255, 255, .12); }
+
+/* ---------- layout ---------- */
+.view { max-width: 1080px; margin: 0 auto; padding: 22px 20px 8px; }
+.view h1 { font-size: 1.7rem; margin: 4px 0 4px; }
+.lede { color: var(--muted); margin: 0 0 18px; max-width: 640px; }
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+.card h2 { font-size: 1.15rem; margin: 0 0 10px; }
+.card h3 { font-size: 1rem; margin: 16px 0 8px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+/* ---------- stat tiles ---------- */
+.stat { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--card-shadow); }
+.stat small { display: block; color: var(--muted); font-size: .82rem; text-transform: uppercase; letter-spacing: .06em; }
+.stat strong { display: block; font-size: 1.55rem; margin-top: 4px; }
+.stat .sub { color: var(--muted); font-size: .85rem; }
+.stat.income strong { color: var(--green); }
+.stat.spent strong { color: var(--red); }
+.stat.left strong { color: var(--amber); }
+.stat.good strong { color: var(--green); }
+
+/* ---------- bars & meters ---------- */
+.meter { height: 10px; background: #eee7d3; border-radius: 6px; overflow: hidden; margin: 6px 0 2px; }
+.meter > i { display: block; height: 100%; background: var(--green); border-radius: 6px; }
+.meter.over > i { background: var(--red); }
+.meter.warn > i { background: var(--amber); }
+.rowline { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.rowline:last-child { border-bottom: 0; }
+.rowline .cat { font-weight: 700; }
+.rowline .fig { color: var(--muted); white-space: nowrap; }
+.rowline .fig b { color: var(--ink); }
+.pill { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: .8rem; background: var(--amber-soft); color: #7a4d12; }
+.pill.ok { background: #dcead9; color: var(--green-deep); }
+.pill.bad { background: var(--red-soft); color: var(--red); }
+
+/* ---------- tables ---------- */
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .82rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.pos { color: var(--green); font-weight: 700; }
+.neg { color: var(--red); font-weight: 700; }
+.tag { display: inline-block; background: #eef0e6; border-radius: 6px; padding: 1px 8px; font-size: .85rem; }
+
+/* ---------- forms ---------- */
+.form-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.form-grid label { display: block; font-size: .85rem; color: var(--muted); margin-bottom: 4px; }
+.form-grid input, .form-grid select { width: 100%; padding: 9px 10px; border: 1px solid #cfc6ac; border-radius: 9px; background: #fff; }
+.btn {
+  display: inline-block; border: 0; border-radius: 10px;
+  background: var(--green); color: #fff; padding: 10px 18px; font-weight: 700;
+}
+.btn:hover { background: var(--green-deep); }
+.btn.ghost { background: transparent; color: var(--green); border: 1px solid var(--green); }
+.btn.danger { background: var(--red); }
+.btn.small { padding: 5px 10px; font-size: .85rem; border-radius: 8px; }
+.inline-form { display: flex; gap: 8px; flex-wrap: wrap; align-items: end; }
+.inline-form label { font-size: .85rem; color: var(--muted); }
+.inline-form input, .inline-form select { padding: 8px 10px; border: 1px solid #cfc6ac; border-radius: 9px; background: #fff; }
+
+/* ---------- goals ---------- */
+.goal { border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; background: var(--paper); box-shadow: var(--card-shadow); }
+.goal h3 { margin: 0 0 4px; }
+.goal .big { font-size: 1.4rem; font-weight: 700; }
+.goal .muted { color: var(--muted); font-size: .9rem; }
+
+/* ---------- footer & phone nav ---------- */
+.foot { max-width: 1080px; margin: 0 auto; padding: 8px 20px 30px; color: var(--muted); font-size: .9rem; }
+.phone-nav {
+  display: none;
+  position: fixed; left: 0; right: 0; bottom: 0;
+  background: var(--green-deep);
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  justify-content: space-around;
+}
+.phone-nav a { color: #dfe4d2; text-decoration: none; font-size: .82rem; padding: 8px 6px; border-radius: 8px; }
+.phone-nav a.active { background: var(--amber); color: var(--green-deep); font-weight: 700; }
+
+canvas.chart { width: 100%; height: auto; display: block; }
+.empty { color: var(--muted); font-style: italic; }
+.notice { background: #e7f0e3; border: 1px solid #b9d2b2; color: var(--green-deep); border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; }
+
+/* ---------- phone layout ---------- */
+@media (max-width: 760px) {
+  .main-nav { display: none; }
+  .phone-nav { display: flex; }
+  .topbar { gap: 12px; padding: 12px 14px; }
+  .brand small { display: none; }
+  .month-picker { margin-left: auto; }
+  .view { padding: 16px 14px 8px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr 1fr; }
+  .stat strong { font-size: 1.35rem; }
+  table .hide-phone { display: none; }
+  .foot { padding-bottom: 20px; }
+}
